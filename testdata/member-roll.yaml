@@ -7,6 +7,6 @@ spec:
   # a list of namespaces that should be joined into the service mesh
   # for example, to add the bookinfo namespace
   - bookinfo
-  - foo
-  - bar
-  - legacy
+#  - foo
+#  - bar
+#  - legacy

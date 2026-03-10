@@ -5,4 +5,4 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: "quay.io/maistra/servicemesh-olm-iib:2.0.2"
+  image: "quay.io/yuaxu/iib:latest"

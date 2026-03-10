@@ -36,7 +36,7 @@ class OCP(object):
         """
         self.profile = profile
         self.assets = assets
-        self.installer_url = "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{:s}/openshift-install-linux-{:s}.tar.gz".format(version, version)
+        self.installer_url = "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{:s}/openshift-install-rhel9-amd64.tar.gz".format(version)
         self.oc_url = "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{:s}/openshift-client-linux-{:s}.tar.gz".format(version, version)
         self.config = config
 
@@ -54,6 +54,7 @@ class OCP(object):
         os.environ['AWS_PROFILE'] = self.profile
 
         # download the installer
+        
         print('Downloading the installer...')
         r = requests.get(self.installer_url, stream=True, verify=False)
         chunkSize = 1024
@@ -68,8 +69,9 @@ class OCP(object):
             raise RuntimeError
         shutil.unpack_archive('openshift-install.tar.gz', 'client')
         os.remove('openshift-install.tar.gz')
-        shutil.move('client/openshift-install', './openshift-install')
+        shutil.move('client/openshift-install-fips', './openshift-install')
         os.chmod('openshift-install', 0o775)
+        
 
         # deploy the cluster
         print('Deploying the cluster...')
@@ -82,6 +84,7 @@ class OCP(object):
         print('Cluster deployment completed.')
         os.environ['KUBECONFIG'] = self.assets + '/auth/kubeconfig'
 
+        
         print('Downloading the oc client...')
         r = requests.get(self.oc_url, stream=True, verify=False)
         chunkSize = 1024
@@ -108,6 +111,7 @@ class OCP(object):
         shutil.move('client/oc', os.getenv('HOME') + '/bin/oc')
         shutil.move('client/kubectl', os.getenv('HOME') + '/bin/kubectl')
         
+
         print('Check cluster info')
         sp.run(['kubectl', 'cluster-info'])
 
@@ -134,10 +138,9 @@ class OCP(object):
         print(proc.stdout)
 
     def uninstall(self):
-        """ Destroy a cluster
-        """
         os.environ['AWS_PROFILE'] = self.profile
 
+        """
         # download the installer
         print('Downloading the installer...')
         r = requests.get(self.installer_url, stream=True, verify=False)
@@ -153,12 +156,13 @@ class OCP(object):
             raise RuntimeError
         shutil.unpack_archive('openshift-install.tar.gz', 'client')
         os.remove('openshift-install.tar.gz')
-        shutil.move('client/openshift-install', './openshift-install')
+        shutil.move('client/openshift-install-fips', './openshift-install')
         os.chmod('openshift-install', 0o775)
-
+        """
+        
         print('Destroying a cluster...')
         proc = sp.run(['./openshift-install', '--dir=' + self.assets, 'destroy', 'cluster', '--log-level=debug'], check=True)
         if proc.returncode == 0:
             print('Uninstall completed')
             shutil.rmtree(self.assets)
-            os.remove('openshift-install')
+            #os.remove('openshift-install')

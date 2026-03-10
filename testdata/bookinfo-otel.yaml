@@ -67,11 +67,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: details
         version: v1
     spec:
-      serviceAccountName: bookinfo-details
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: details
         image: quay.io/maistra/examples-bookinfo-details-v1:2.4.0
@@ -120,11 +121,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: ratings
         version: v1
     spec:
-      serviceAccountName: bookinfo-ratings
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: ratings
         image: quay.io/maistra/examples-bookinfo-ratings-v1:2.4.0
@@ -173,11 +175,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: reviews
         version: v1
     spec:
-      serviceAccountName: bookinfo-reviews
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: reviews
         image: quay.io/maistra/examples-bookinfo-reviews-v1:2.4.0
@@ -215,11 +218,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: reviews
         version: v2
     spec:
-      serviceAccountName: bookinfo-reviews
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: reviews
         image: quay.io/maistra/examples-bookinfo-reviews-v2:2.4.0
@@ -257,11 +261,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: reviews
         version: v3
     spec:
-      serviceAccountName: bookinfo-reviews
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: reviews
         image: quay.io/maistra/examples-bookinfo-reviews-v3:2.4.0
@@ -323,11 +328,12 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
+        sidecar.opentelemetry.io/inject: "true"
       labels:
         app: productpage
         version: v1
     spec:
-      serviceAccountName: bookinfo-productpage
+      serviceAccountName: otel-collector-sidecar
       containers:
       - name: productpage
         image: quay.io/maistra/examples-bookinfo-productpage-v1:2.4.0

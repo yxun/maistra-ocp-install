@@ -91,7 +91,7 @@ def main():
             ##ocp.login_bot()
 
             # Create testing users, qe1 and qe2
-            ocp.create_users()
+            ##ocp.create_users()
             ocp.logout()
 
         elif moitt.uninstall:

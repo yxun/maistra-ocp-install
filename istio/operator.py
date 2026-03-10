@@ -79,6 +79,7 @@ class Operator(object):
             sp.run(['oc', 'set', 'data', 'secret/pull-secret', '-n', 'openshift-config', '--from-file=.dockerconfigjson={:s}'.format('olm/authfile')])
             sp.run(['oc', 'apply', '-f', 'olm/icsp.yaml'])
             sp.run(['sleep', '120'])
+            # scale existing deployment marketplace-operator to 0 in openshift-marketplace ns
 
         sp.run(['oc', 'project', 'openshift-marketplace'])
         sp.run(['oc', 'apply', '-f', 'olm/pull_secret.yaml'])
